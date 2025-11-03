@@ -21,3 +21,5 @@ console.log(`File written successfully to ${filePath}`);
 const data = fs.readFileSync(filePath, 'utf8');
 
 console.log(`\nFile read successfully from ${filePath}`);
+console.log('File Content:');
+console.log(data);
