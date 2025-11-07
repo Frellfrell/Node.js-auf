@@ -21,4 +21,7 @@ const server = http.createServer((req, res) => {
     res.end('Internal Server Error');
   }
 });
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
