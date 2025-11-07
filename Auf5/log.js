@@ -1,8 +1,8 @@
 const http = require('http');
 const fs = require('fs');
+require('dotenv').config();
 
-
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
   try {
     // Специально вызываем ошибку
