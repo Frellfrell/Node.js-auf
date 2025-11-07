@@ -34,7 +34,10 @@ app.post("/", (req, res) => {
     res.status(500).json({ error: "Произошла ошибка при выполнении POST-запроса" });
   }
 });
+app.use((req, res) => {
+  res.status(404).json({ error: "Маршрут не найден" });
+});
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
