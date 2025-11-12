@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import db from "./db.js";
 
 dotenv.config();
 
@@ -8,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/products", (_req, res) => {
     try {
          res.status(200).send("Hello, World!");
   } catch (error) {
