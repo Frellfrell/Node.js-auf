@@ -10,7 +10,7 @@ const App = sequelize.define('App', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
     size: {
       type: DataTypes.INTEGER,
       allowNull: false
