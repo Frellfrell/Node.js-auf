@@ -12,6 +12,14 @@ try {
 } catch (err) {
   console.error("DB connection error:", err);
 }
+
+// Загрузка тестовых данных при старте сервера
+const existing = await Book.findAll();
+if (existing.length === 0) {
+  await Book.bulkCreate(booksData);
+  console.log("Sample books inserted!");
+}
+
 //Получение всех книг
 app.get("/books", async (_req, res) => {
   const books = await Book.findAll();
