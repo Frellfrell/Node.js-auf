@@ -1,6 +1,7 @@
 import Book  from "./models/book.js";
 import express from "express";
 import sequelize from "./config/db.js";
+import { booksData } from "./sampleData.js";
 
 const app = express();
 app.use(express.json());
