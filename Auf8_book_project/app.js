@@ -4,6 +4,14 @@ import sequelize from "./config/db.js";
 
 const app = express();
 app.use(express.json());
+
+// Проверка подключения к базе
+try {
+  await sequelize.authenticate();
+  console.log("DB connected!");
+} catch (err) {
+  console.error("DB connection error:", err);
+}
 //Получение всех книг
 app.get("/books", async (_req, res) => {
   const books = await Book.findAll();
