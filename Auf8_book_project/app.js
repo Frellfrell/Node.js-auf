@@ -1,6 +1,6 @@
 import Book  from "./models/book.js";
 //Получение всех книг
-application.get("/books", async (req, res) => {
+app.get("/books", async (req, res) => {
   try {
     const books = await Book.findAll();
     res.json(books);
