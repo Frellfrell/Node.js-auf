@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import configFile from "./config.json" assert { type: "json" };
+import configFile from "./config.json";
 
 const env = "development";
 const config = configFile[env];
