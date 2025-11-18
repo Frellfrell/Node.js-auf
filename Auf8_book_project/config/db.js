@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize";
-import configFile from "./config.json";
+import { createRequire } from "module";
 
+const require = createRequire(import.meta.url);
+const configFile = require("./config.json");
 const env = "development";
 const config = configFile[env];
 
