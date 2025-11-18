@@ -22,6 +22,7 @@ app.get("/books", async (_req, res) => {
 app.post("/books", async (req, res) => {
   try {
     const book = await Book.create(req.body);
+    console.log("Received body:", req.body);
     res.json(book);
   } catch (error) {
     res.status(500).json({ error: "Failed to create book" });
