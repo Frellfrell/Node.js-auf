@@ -1,12 +1,13 @@
 import Book  from "./models/book.js";
+import express from "express";
+import sequelize from "./config/db.js";
+
+const app = express();
+app.use(express.json());
 //Получение всех книг
-app.get("/books", async (req, res) => {
-  try {
-    const books = await Book.findAll();
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch books" });
-  }
+app.get("/books", async (_req, res) => {
+  const books = await Book.findAll();
+  res.json(books);
 });
 
 //Create a new book
@@ -26,3 +27,15 @@ app.put("/books/:id", async (req, res) => {
        
             res.json({ message: "Book updated successfully" });
         });
+
+        // DELETE — удалить книгу
+app.delete("/books/:id", async (req, res) => {
+  const id = req.params.id;
+  await Book.destroy({ where: { id } });
+  res.json({ message: "Deleted" });
+});
+
+//Запуск сервера
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
