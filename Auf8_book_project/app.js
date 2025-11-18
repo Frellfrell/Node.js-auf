@@ -18,3 +18,11 @@ app.post("/books", async (req, res) => {
     res.status(500).json({ error: "Failed to create book" });
   }
 });
+
+//Update книги по ID
+app.put("/books/:id", async (req, res) => {
+    const id = req.params.id;
+       await Book.update(req.body, { where: { id } });
+       
+            res.json({ message: "Book updated successfully" });
+        });
