@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+//Проверка авторизации через userId в заголовке
 export const authMiddleware = async (req, res, next) => {
     const userId = req.headers['user-id'];
   if (!userId) return res.status(401).json({ message: 'Нет авторизации' });
