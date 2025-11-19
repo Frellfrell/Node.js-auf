@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sequelize = new Sequelize(
-    'Development',
+    'development',
      'root',
       'root',
        {
