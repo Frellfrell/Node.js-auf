@@ -75,7 +75,7 @@ app.post('/change-password', autMiddl, async (req, res) => {
 });
 
 // 3. Удаление аккаунта
-app.post('/delete-account', auth, async (req, res) => {
+app.post('/delete-account', autMiddl, async (req, res) => {
   const { password } = req.body;
 
   const match = await bcrypt.compare(password, req.user.password);
@@ -89,12 +89,12 @@ app.post('/delete-account', auth, async (req, res) => {
 });
 
 // 4. Админ
-app.get('/admin', auth, mustChangePassword, isAdmin, (req, res) => {
+app.get('/admin', autMiddl, mustChangePassword, isAdmin, (req, res) => {
   res.json({ message: 'Добро пожаловать в админ-панель!' });
 });
 
 // 5. Смена email
-app.post('/change-email', auth, async (req, res) => {
+app.post('/change-email', autMiddl, async (req, res) => {
   const { newEmail, password } = req.body;
 
   const match = await bcrypt.compare(password, req.user.password);
