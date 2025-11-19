@@ -23,8 +23,13 @@ if (existing.length === 0) {
 
 //Получение всех книг
 app.get("/books", async (_req, res) => {
-  const books = await Book.findAll();
-  res.json(books);
+  try { 
+    const books = await Book.findAll();
+    res.json(books);
+  }  catch(error) {
+    res.status(500).json({ error: "Failed to fetch books" });
+  }
+  
 });
 
 //Create a new book
