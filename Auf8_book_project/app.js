@@ -45,16 +45,25 @@ app.post("/books", async (req, res) => {
 
 //Update книги по ID
 app.put("/books/:id", async (req, res) => {
-    const id = req.params.id;
-       await Book.update(req.body, { where: { id } });
-       
+    const [updated] = await Book.update(req.body, { where: { id } });
+
+if (updated === 0) {
+
+  return res.status(404).json({ error: "Book not found" });
+
+}
             res.json({ message: "Book updated successfully" });
         });
 
         // DELETE — удалить книгу
 app.delete("/books/:id", async (req, res) => {
-  const id = req.params.id;
-  await Book.destroy({ where: { id } });
+ const deleted = await Book.destroy({ where: { id } });
+
+if (!deleted) {
+
+  return res.status(404).json({ error: "Book not found" });
+
+}
   res.json({ message: "Deleted" });
 });
 
