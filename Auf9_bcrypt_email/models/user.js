@@ -18,7 +18,13 @@ const User = sequelize.define('User', {
   role: {
     type: DataTypes.ENUM('user', 'admin'),
     defaultValue: 'user',
-  },
-});
+  } 
+   },
+  {
+    tableName: 'users',      // название таблицы в базе
+    timestamps: true,        // в таблице есть createdAt/updatedAt
+    freezeTableName: true    // чтобы Sequelize не менял название таблицы
+  }
+);
 
 export default User;
