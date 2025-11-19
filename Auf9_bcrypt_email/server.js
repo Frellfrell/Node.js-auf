@@ -63,7 +63,7 @@ app.post('/register', async (req, res) => {
 app.post('/change-password', autMiddl, async (req, res) => {
   const { newPassword } = req.body;
 
-  const hash = await bcrypt.hash(newPassword, 10);
+  const hash = await bcrypt.hash(newPassword, 15);
 
   await req.user.update({
     password: hash,
