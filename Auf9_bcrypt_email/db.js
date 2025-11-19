@@ -2,7 +2,11 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const sequelize = new Sequelize('mydb', 'root', 'password', {
+const sequelize = new Sequelize(
+    'Development',
+     'root',
+      'root',
+       {
   host: 'localhost',
   dialect: 'mysql'
 });
