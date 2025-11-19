@@ -1,4 +1,4 @@
-import { dotenv } from 'dotenv';
+import dotenv from 'dotenv';
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { Sequelize, DataTypes } from 'sequelize';
