@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bcrypt from 'bcrypt';
-import { Sequelize, DataTypes } from 'sequelize';
 import User from './models/user.js';
 
 dotenv.config();
