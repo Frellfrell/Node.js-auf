@@ -7,9 +7,9 @@ dotenv.config();
 // middleware/authenticateJWT.js
 export default function authenticateJWT(req, res, next) {
      try {
-    const header = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!header) {
+    if (!authHeader) {
         return res.status(401).json({ error: "Authorization header missing" });
     }
 
