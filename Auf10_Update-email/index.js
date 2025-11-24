@@ -2,11 +2,11 @@ import axios from "axios";
 import dotenv from "dotenv";
 
 dotenv.config();
-console.log("TOKEN из .env:", process.env.token);
+console.log("TOKEN из .env:", process.env.TOKEN);
 
 async function testMe() {
     try {
-        const token = process.env.token;
+       const token = process.env.TOKEN;
         if (!token) throw new Error("Токен не найден в .env");
 
         const response = await axios.get("http://localhost:3000/me", {
