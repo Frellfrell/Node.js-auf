@@ -9,6 +9,16 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+//Тест
+
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Сервер работает</h1>
+    <p>POST /register — регистрация</p>
+    <p>GET /users — посмотреть список пользователей</p>
+  `);
+});
+
 // Middleware авторизации
 const autMiddl = async (req, res, next) => {
   const userId = req.headers['user-id']; //  авторизация
