@@ -2,7 +2,9 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import authenticateJWT from "./Middleware/authenticateJWT.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const app = express();
 app.use(express.json());
