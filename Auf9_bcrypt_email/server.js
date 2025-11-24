@@ -98,7 +98,13 @@ app.post('/register', async (req, res) => {
 
 // 2. Смена пароля
 app.post('/change-password', autMiddleware, async (req, res) => {
+  try { 
   const { newPassword } = req.body;
+  if (!newPassword)
+      return res.status(400).json({ message: 'Новый пароль обязателен' });
+
+    if (newPassword.length < 4)
+      return res.status(400).json({ message: 'Пароль должен быть не менее 4 символов' });
 
   const hash = await bcrypt.hash(newPassword, 15);
 
@@ -108,11 +114,18 @@ app.post('/change-password', autMiddleware, async (req, res) => {
   });
 
   res.json({ message: 'Пароль успешно изменён' });
+  } catch (err) {
+     res.status(500).json({ message: 'Ошибка сервера при смене пароля' })
+  }
 });
 
 // 3. Удаление аккаунта
 app.post('/delete-account', autMiddleware, async (req, res) => {
+  try { 
   const { password } = req.body;
+  
+  if (!password)
+      return res.status(400).json({ message: 'Пароль обязателен' });
 
   const match = await bcrypt.compare(password, req.user.password);
 
@@ -122,15 +135,19 @@ app.post('/delete-account', autMiddleware, async (req, res) => {
   await req.user.destroy();
 
   res.json({ message: 'Аккаунт удалён' });
+   } catch (err) {
+ res.status(500).json({ message: 'Ошибка сервера при удалении аккаунта' });
+   }
 });
 
 // 4. Админ
-app.get('/admin', autMiddleware, mustChangePassword, isAdmin, (req, res) => {
+app.get('/admin', autMiddleware, mustChangePassword, isAdmin, (_req, res) => {
   res.json({ message: 'Добро пожаловать в админ-панель!' });
 });
 
 // 5. Смена email
 app.post('/change-email', autMiddleware, async (req, res) => {
+  try { 
   const { newEmail, password } = req.body;
 
   const match = await bcrypt.compare(password, req.user.password);
@@ -146,6 +163,9 @@ app.post('/change-email', autMiddleware, async (req, res) => {
   await req.user.update({ email: newEmail });
 
   res.json({ message: 'Email изменён' });
+  } catch (err) {
+     res.status(500).json({ message: 'Ошибка сервера при смене email' });
+  }
 });
 
 app.listen(PORT, () => {
