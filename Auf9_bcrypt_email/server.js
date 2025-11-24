@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 //Тест
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send(`
     <h1>Сервер работает</h1>
     <p>POST /register — регистрация</p>
@@ -19,8 +19,21 @@ app.get('/', (req, res) => {
   `);
 });
 
+// ПОКАЗ ПОЛЬЗОВАТЕЛЕЙ (без паролей)
+app.get('/users', async (_req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: ['id', 'email', 'role', 'mustChangePassword']
+    });
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
 // Middleware авторизации
-const autMiddl = async (req, res, next) => {
+const autMiddleware = async (req, res, next) => {
+  try { 
   const userId = req.headers['user-id']; //  авторизация
 
   if (!userId)
@@ -33,6 +46,10 @@ const autMiddl = async (req, res, next) => {
 
   req.user = user;
   next();
+  } catch (error) {
+    res.status(500).json({massage: 'Error registration'});
+  }
+  
 };
 // Middleware роли admin
 
@@ -53,7 +70,13 @@ const mustChangePassword = (req, res, next) => {
 
 // 1. Регистрация с проверкой email
 app.post('/register', async (req, res) => {
+  try { 
   const { email, password } = req.body;
+   if (!email || !password)
+      return res.status(400).json({ message: 'Email и пароль обязательны' });
+
+    if (password.length < 4)
+      return res.status(400).json({ message: 'Пароль должен быть не менее 4 символов' });
 
   const exists = await User.findOne({ where: { email } });
   if (exists)
@@ -67,10 +90,14 @@ app.post('/register', async (req, res) => {
   });
 
   res.json({ message: 'Регистрация успешна' });
+  } catch (err){
+     res.status(500).json({ message: 'Ошибка сервера при регистрации' });
+  
+  }
 });
 
 // 2. Смена пароля
-app.post('/change-password', autMiddl, async (req, res) => {
+app.post('/change-password', autMiddleware, async (req, res) => {
   const { newPassword } = req.body;
 
   const hash = await bcrypt.hash(newPassword, 15);
@@ -84,7 +111,7 @@ app.post('/change-password', autMiddl, async (req, res) => {
 });
 
 // 3. Удаление аккаунта
-app.post('/delete-account', autMiddl, async (req, res) => {
+app.post('/delete-account', autMiddleware, async (req, res) => {
   const { password } = req.body;
 
   const match = await bcrypt.compare(password, req.user.password);
@@ -98,12 +125,12 @@ app.post('/delete-account', autMiddl, async (req, res) => {
 });
 
 // 4. Админ
-app.get('/admin', autMiddl, mustChangePassword, isAdmin, (req, res) => {
+app.get('/admin', autMiddleware, mustChangePassword, isAdmin, (req, res) => {
   res.json({ message: 'Добро пожаловать в админ-панель!' });
 });
 
 // 5. Смена email
-app.post('/change-email', autMiddl, async (req, res) => {
+app.post('/change-email', autMiddleware, async (req, res) => {
   const { newEmail, password } = req.body;
 
   const match = await bcrypt.compare(password, req.user.password);
