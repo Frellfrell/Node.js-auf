@@ -7,7 +7,7 @@ async function getToken() {
             password: "12345",
         });
 
-        const token = response.data.token;
+        const token = response.data.TOKEN;
         console.log("Скопируй токен в  .env:");
         console.log(token);
     } catch (error) {
