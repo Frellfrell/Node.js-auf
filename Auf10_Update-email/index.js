@@ -7,7 +7,7 @@ async function testMe() {
     try {
         const token = process.env.TOKEN;
         if (!token) throw new Error("Токен не найден в .env");
-
+console.log("TOKEN из .env:", process.env.TOKEN);
         const response = await axios.get("http://localhost:3000/me", {
             headers: { Authorization: `Bearer ${token}` },
         });
