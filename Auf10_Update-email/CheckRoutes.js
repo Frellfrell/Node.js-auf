@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { authMiddleware } from "./authMiddleware.js";
+import authenticateJWT  from "./authenticateJWT.js";
 
 
 const app = express();
@@ -35,7 +35,7 @@ app.post("/login", async (req, res) => {
 });
 
 // PROTECTED маршрут
-app.get("/me", authMiddleware, (req, res) => {
+app.get("/me", authenticateJWT, (req, res) => {
     res.json({ message: "Успешно!", user: req.user });
 });
 
