@@ -10,6 +10,10 @@ const app = express();
 app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+if (!JWT_SECRET) {
+    console.error(" Ошибка: нет JWT_SECRET в .env");
+    process.exit(1);
+}
 
 const users = [
     {
