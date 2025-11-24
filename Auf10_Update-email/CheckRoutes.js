@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { authMiddleware } from "./Middleware/authenticateJWT.js";
+import authenticateJWT from "./Middleware/authenticateJWT.js";
 
 
 const app = express();
