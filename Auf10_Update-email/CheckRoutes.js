@@ -36,8 +36,13 @@ app.post("/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ error: "Неверные данные" });
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
-    res.json({ token, user: { id: user.id, email: user.email } });
+    const token = jwt.sign(
+        { id: user.id,
+             email: user.email
+             },
+              JWT_SECRET,
+               { expiresIn: "1h" });
+    res.json({ token });
 });
 
 // PROTECTED маршрут
