@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
 // middleware/authenticateJWT.js
 export default function authenticateJWT(req, res, next) {
