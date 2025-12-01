@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import authenticateJWT from "./Middleware/authenticateJWT.js";
 import dotenv from "dotenv";
+import authorizeRole from "./Middleware/authorizeRole.js";
 
 dotenv.config();
 
@@ -45,7 +46,8 @@ app.post("/login", async (req, res) => {
 
     const token = jwt.sign(
         { id: user.id,
-             email: user.email
+             email: user.email,
+                role: user.role
              },
               JWT_SECRET,
                { expiresIn: "1h" });
@@ -76,6 +78,23 @@ app.delete("/delete-account", authenticateJWT, (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Ошибка при удалении аккаунта" });
     }
+});
+// UPDATE ROLE -  для админа
+app.patch("/update-role", authenticateJWT, authorizeRole("admin"), (req, res) => {
+    const { userId, newRole } = req.body;
+
+    if (!userId || !newRole) {
+        return res.status(400).json({ error: "userId и newRole обязательны" });
+    }
+
+    const user = users.find(u => u.id === Number(userId));
+    if (!user) {
+        return res.status(404).json({ error: "Пользователь не найден" });
+    }
+
+    user.role = newRole;
+
+    return res.json({ message: "Роль успешно обновлена", user });
 });
 
 
