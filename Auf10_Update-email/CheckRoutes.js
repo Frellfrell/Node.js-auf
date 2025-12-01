@@ -16,7 +16,7 @@ if (!JWT_SECRET) {
     process.exit(1);
 }
 
-const users = [
+let users = [
     {
         id: 1,
         email: "testuser@example.com",
