@@ -20,6 +20,13 @@ const users = [
         id: 1,
         email: "testuser@example.com",
         password: bcrypt.hashSync("12345", 10),
+        role: "admin"
+    },
+    {
+        id: 2,
+        email: "user2@example.com",
+        password: bcrypt.hashSync("12345", 10),
+        role: "user"
     }
 ];
 
