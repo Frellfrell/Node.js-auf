@@ -97,6 +97,31 @@ app.patch("/update-role", authenticateJWT, authorizeRole("admin"), (req, res) =>
     return res.json({ message: "Роль успешно обновлена", user });
 });
 
+// REFRESH TOKEN
+app.post("/refresh-token", authenticateJWT, (req, res) => {
+    try {
+        const userData = req.user; // взято из токена
+
+        // Создаём новый токен
+        const newToken = jwt.sign(
+            {
+                id: userData.id,
+                email: userData.email,
+                role: userData.role
+            },
+            JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        return res.json({
+            message: "Токен обновлён",
+            token: newToken
+        });
+
+    } catch (error) {
+        return res.status(401).json({ error: "Не удалось обновить токен" });
+    }
+});
 
 
 
