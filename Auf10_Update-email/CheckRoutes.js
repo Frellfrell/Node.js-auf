@@ -52,3 +52,25 @@ app.get("/me", authenticateJWT, (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+
+// DELETE ACCOUNT
+app.delete("/delete-account", authenticateJWT, (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const userExists = users.find(u => u.id === userId);
+        if (!userExists) return res.status(404).json({ error: "Пользователь не найден" });
+
+        // Удаляем пользователя из массива
+        users = users.filter(u => u.id !== userId);
+
+        res.json({ message: "Аккаунт успешно удалён" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Ошибка при удалении аккаунта" });
+    }
+});
+
+
+
+
