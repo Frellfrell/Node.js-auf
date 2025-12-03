@@ -69,3 +69,64 @@ app.get("/products/:id", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error", details: error.message });
     }
 });
+
+// PUT /products/:id - Обновление продукта по ID
+app.put("/products/:id", async (req, res) => {
+    try {
+        const db = getDB();
+        if (!db) {
+            return res.status(500).json({ error: "Database not connected" });
+        }
+        const { id } = req.params.id;
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Invalid product ID" });
+        }
+        const { name, price, description } = req.body;
+        const updateDate = {};
+        if (name) updateDate.name = name;
+        if (price) updateDate.price = price;
+        if (description) updateDate.description = description;
+
+        if (Object.keys(updateDate).length === 0) {
+            return res.status(400).json({ error: "No fields to update" });
+        }
+        const result = await db.collection("products").updateOne(
+            { _id: new ObjectId(id) },
+            { $set: updateDate }
+        );
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+        return res.status(200).json({ message: "Product updated" });
+    } catch (error) {
+        console.error("Error PUT/products/:id:", error.message);
+        res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+});
+
+// DELETE /products/:id - Удаление продукта по ID
+app.delete("/products/:id", async (req, res) => {
+    try {
+        const db = getDB();
+        if (!db) {
+            return res.status(500).json({ error: "Database not connected" });
+        }
+        const id = req.params.id;
+
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Неверный ID" });
+        }
+
+        const result = await db.collection("products").deleteOne({ _id: new ObjectId(id) });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: "Продукт не найден" });
+        }
+
+        res.status(200).json({ message: "Продукт удалён" });
+
+    } catch (error) {
+        console.error("Ошибка DELETE /products/:id:", error.message);
+        res.status(500).json({ error: "Ошибка сервера", details: error.message });
+    }
+});
