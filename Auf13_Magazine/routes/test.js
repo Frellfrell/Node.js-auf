@@ -7,7 +7,7 @@ import Article from '../models/Article.js';
 const router = express.Router();
 
 // Создание издателя, журнала, статьи и тега для тестирования
-router.post('/test', async (req, res) => {
+router.post('/test', async (_req, res) => {
   try {
     // Создание издателя
     const publisher = new Publisher({
