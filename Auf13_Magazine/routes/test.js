@@ -54,4 +54,16 @@ router.post('/test', async (_req, res) => {
   }
 });
 
+// GET-запрос для получения всех журналов с Publisher
+router.get('/magazines', async (_req, res) => {
+  try {
+    const magazines = await Magazine.find()
+      .populate('publisher'); // Заполняем ссылку на Publisher
+    res.status(200).json(magazines);
+  } catch (err) {
+    console.error('Error fetching magazines:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;
