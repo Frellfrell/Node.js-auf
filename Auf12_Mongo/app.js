@@ -53,7 +53,7 @@ app.get("/products/:id", async (req, res) => {
             return res.status(500).json({ error: "Database not connected" });
 
         }
-        const { id } = req.params.id;
+        const id  = req.params.id;
          
         if (!ObjectId.isValid(id)) {
             return res.status(400).json({ error: "Invalid product ID" });
@@ -77,7 +77,7 @@ app.put("/products/:id", async (req, res) => {
         if (!db) {
             return res.status(500).json({ error: "Database not connected" });
         }
-        const { id } = req.params.id;
+        const id = req.params.id;
         if (!ObjectId.isValid(id)) {
             return res.status(400).json({ error: "Invalid product ID" });
         }
