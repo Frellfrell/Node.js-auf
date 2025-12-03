@@ -1,11 +1,14 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import testRoutes from './routes/testRoutes.js';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+//Используем роуты для тестирования
+app.use('/api', testRoutes);
 
 const mongoUri = process.env.MONGO_URI || '';
 
