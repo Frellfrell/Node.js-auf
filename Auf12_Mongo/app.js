@@ -130,3 +130,21 @@ app.delete("/products/:id", async (req, res) => {
         res.status(500).json({ error: "Ошибка сервера", details: error.message });
     }
 });
+
+//   SERVER START
+async function startServer() {
+    try {
+        const db = await connectToDB();
+        if (!db) {
+           console.error("Database connection failed");
+           return;
+        } 
+    
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error.message);
+    }
+}
+startServer();
