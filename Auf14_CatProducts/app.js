@@ -28,7 +28,29 @@ app.post('/categories', async (req, res) => {
 });
 
 // Маршрут для добавления продукции 
+app.post('/products', async (req, res) => {
+    try {
+        const product = new Product({
+         name: req.body.name,
+      price: req.body.price,
+      category: req.body.category,  // Передаём ObjectId категории
+    });
+    await product.save();
+    res.status(201).send(product);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});   
 
+// Маршрут для получения продуктов с популированными категориями
+app.get('/products', async (req, res) => {
+  try {
+    const products = await Product.find().populate('category');
+    res.status(200).send(products);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 
 
 
