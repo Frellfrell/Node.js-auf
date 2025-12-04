@@ -43,7 +43,7 @@ app.post('/products', async (req, res) => {
 });   
 
 // Маршрут для получения продуктов с популированными категориями
-app.get('/products', async (req, res) => {
+app.get('/products', async (_req, res) => {
   try {
     const products = await Product.find().populate('category');
     res.status(200).send(products);
