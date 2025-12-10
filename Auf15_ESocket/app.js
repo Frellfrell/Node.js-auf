@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
 
     // Когда клиент отключается
     socket.on('disconnect', () => {
-        console.log('Пользователь отключен');
+        console.log('Пользователь отключен:', socket.id);
     });
 });
 
