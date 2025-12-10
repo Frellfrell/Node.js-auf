@@ -37,24 +37,24 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-        const msgDiv = document.getElementById('message');
+         const messagesDiv = document.getElementById('messages');
         const msgInput = document.getElementById('input');
         const sendBtn = document.getElementById('sendBtn');
 
-        socket.on('chat message', (msg, senderId) => {
+        socket.on('chatMessage', (msg, senderId) => {
           const myId = socket.id;
             const label = senderId === myId ? 'Я' : senderId;
             messagesDiv.innerHTML += `<p><strong>${label}:</strong> ${msg}</p>`;
-            msgDiv.scrollTop = msgDiv.scrollHeight;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         });
 
         sendBtn.addEventListener('click', () => {
             const message = msgInput.value.trim();
 
-            if (message !== "") {
-                socket.emit('chat message', message);
-                msgInput.value = '';
-            }
+             if (!message) return;
+
+            socket.emit('chatMessage', message);
+            msgInput.value = '';
         });
         // Отправка по Enter
         messageInput.addEventListener('keypress', (e) => {
