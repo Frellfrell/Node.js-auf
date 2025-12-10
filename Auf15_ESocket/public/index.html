@@ -20,16 +20,18 @@
         const msgInput = document.getElementById('input');
         const sendBtn = document.getElementById('sendBtn');
 
-        socket.on('chatMessage', (msg, socketId) => {
-            console.log('msg');
-            msgDiv.innerHTML += `<p>${socketId}: ${msg}</p>`;
+        socket.on('chat message', (msg) => {
+            msgDiv.innerHTML += `<p>${msg}</p>`;
             msgDiv.scrollTop = msgDiv.scrollHeight;
         });
 
-         sendBtn.addEventListener('click', () => {
-            const message = msgInput.value;
-            socket.emit('chatMessage', message);
-            msgInput.value = '';
+        sendBtn.addEventListener('click', () => {
+            const message = msgInput.value.trim();
+
+            if (message !== "") {
+                socket.emit('chat message', message);
+                msgInput.value = '';
+            }
         });
         
     </script>   
