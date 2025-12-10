@@ -43,7 +43,7 @@
 
         socket.on('chatMessage', (msg, senderId) => {
           const myId = socket.id;
-            const label = senderId === myId ? 'Я' : senderId;
+            const label = senderId === myId ? 'Я' : senderId ? `Пользователь ${senderId}` : 'Неизвестный пользователь';
             messagesDiv.innerHTML += `<p><strong>${label}:</strong> ${msg}</p>`;
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         });
