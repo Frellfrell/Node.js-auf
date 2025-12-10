@@ -7,12 +7,20 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: { origin: "*" }
+});
 
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static('public'));
+// Отдаём статические файлы из папки public
+app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.json());
+
+// маршрут для проверки сервера
+app.get('/info', (_req, res) => {
+    res.send('Server is running');
+});
 
 //Когда клиент подключается
 
