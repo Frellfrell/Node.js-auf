@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express + Socket.IO</title>
+</head>
+<body>
+    <h1>Socket.IO with Express</h1>
+    <div id="messages">Hello, welcome to the chat!</div>
+    <div>
+        <input type="text" id="input" placeholder="введите сообщение">
+        <button id="sendBtn">Отправить</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const msgDiv = document.getElementById('message');
+        const msgInput = document.getElementById('input');
+        const sendBtn = document.getElementById('sendBtn');
+
+        socket.on('chatMessage', (msg, socketId) => {
+            console.log('msg');
+            msgDiv.innerHTML += `<p>${socketId}: ${msg}</p>`;
+            msgDiv.scrollTop = msgDiv.scrollHeight;
+        });
+
+         sendBtn.addEventListener('click', () => {
+            const message = msgInput.value;
+            socket.emit('chatMessage', message);
+            msgInput.value = '';
+        });
+        
+    </script>   
+</body>
+    
+</html>
