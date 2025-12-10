@@ -14,7 +14,7 @@
             border: 1px solid #ccc;
             padding: 10px;
             height: 300px;
-            overflow-y: scroll;
+            overflow-y: auto;
             margin-bottom: 10px;
         }
         #input {
@@ -41,8 +41,10 @@
         const msgInput = document.getElementById('input');
         const sendBtn = document.getElementById('sendBtn');
 
-        socket.on('chat message', (msg) => {
-            msgDiv.innerHTML += `<p>${msg}</p>`;
+        socket.on('chat message', (msg, senderId) => {
+          const myId = socket.id;
+            const label = senderId === myId ? 'Я' : senderId;
+            messagesDiv.innerHTML += `<p><strong>${label}:</strong> ${msg}</p>`;
             msgDiv.scrollTop = msgDiv.scrollHeight;
         });
 
