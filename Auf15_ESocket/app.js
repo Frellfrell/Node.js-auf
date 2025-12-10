@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
     console.log('Новый пользователь подключен:', socket.id);
 
     // Обработка сообщения от клиента
-    socket.on('chat message', (msg) => {
+    socket.on('chatMessage', (msg) => {
          console.log(`Message received - ${socket.id}: ${msg}`);
         // Отправка подтверждения клиенту
         socket.emit('message received', 'Сообщение получено!');
