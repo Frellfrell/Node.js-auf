@@ -25,7 +25,7 @@ app.get('/info', (_req, res) => {
 //Когда клиент подключается
 
 io.on('connection', (socket) => {
-    console.log('Новый пользователь подключен');
+    console.log('Новый пользователь подключен:', socket.id);
 
     // Обработка сообщения от клиента
     socket.on('chat message', (msg) => {
