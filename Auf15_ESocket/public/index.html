@@ -56,6 +56,12 @@
                 msgInput.value = '';
             }
         });
+        // Отправка по Enter
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
         
     </script>   
 </body>
