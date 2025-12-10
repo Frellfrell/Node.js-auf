@@ -29,10 +29,11 @@ io.on('connection', (socket) => {
 
     // Обработка сообщения от клиента
     socket.on('chat message', (msg) => {
-        console.log('Сообщение от клиента: ' + msg);
-
+         console.log(`Message received - ${socket.id}: ${msg}`);
         // Отправка подтверждения клиенту
         socket.emit('message received', 'Сообщение получено!');
+         // Отправка сообщения всем клиентам вместе с ID отправителя
+        io.emit('chatMessage', msg, socket.id);
     });
 
     // Когда клиент отключается
