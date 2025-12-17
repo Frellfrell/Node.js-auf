@@ -3,6 +3,7 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
+// Установка-маршрут начального баланса пользователя
 router.post('/set-balance', async (req, res) => {
   try {
     const { initialBalance } = req.body;
