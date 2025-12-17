@@ -11,4 +11,15 @@ router.post('/set-balance', async (req, res) => {
         return res.status(400).json({ message: 'Начальный баланс обязателен' });
     }
 
-    if
+    if (typeof initialBalance !== 'number') {
+        return res.status(400).json({ message: 'Начальный баланс должен быть числом' });
+    }
+
+    if (initialBalance < 0) {
+        return res.status(400).json({ message: 'Начальный баланс не может быть отрицательным' });
+    }
+    const user = new User({
+      initialBalance,
+      currentBalance: initialBalance,
+      transactions: []
+    });
