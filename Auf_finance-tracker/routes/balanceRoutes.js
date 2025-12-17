@@ -19,13 +19,16 @@ router.post('/set-balance', async (req, res) => {
     if (initialBalance < 0) {
         return res.status(400).json({ message: 'Начальный баланс не может быть отрицательным' });
     }
+    // Создание нового пользователя с указанным начальным балансом
     const user = new User({
       initialBalance,
       currentBalance: initialBalance,
       transactions: []
     });
+    // Сохранение пользователя в базе данных
      await user.save();
 
+     // Ответ с подтверждением и данными пользователя
     res.status(201).json({
       message: 'Пользователь создан',
       user
@@ -34,3 +37,4 @@ router.post('/set-balance', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
