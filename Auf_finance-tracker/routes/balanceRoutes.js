@@ -23,3 +23,13 @@ router.post('/set-balance', async (req, res) => {
       currentBalance: initialBalance,
       transactions: []
     });
+     await user.save();
+
+    res.status(201).json({
+      message: 'Пользователь создан',
+      user
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
