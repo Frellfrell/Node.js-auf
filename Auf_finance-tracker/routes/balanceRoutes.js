@@ -100,18 +100,22 @@ router.post('/add-expense', async (req, res) => {
     }
 });
 
+//Маршрут для получения текущего баланса и истории транзакций пользователя
 router.get('/balance', async (req, res) => {
   try {
     const { userId } = req.query;
 
+    // Проверка наличия userId
     if (!userId) {
       return res.status(400).json({ message: 'userId обязателен' });
     }
 
+// Поиск пользователя по ID
      const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: 'Пользователь не найден' });
-
-    res.json({ 
+    
+    // Ответ с текущим балансом и историей транзакций
+    res.status(200).json({ 
       currentBalance: user.currentBalance,
       transactions: user.transactions
     });
