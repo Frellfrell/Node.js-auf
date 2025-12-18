@@ -108,4 +108,16 @@ router.get('/balance', async (req, res) => {
       return res.status(400).json({ message: 'userId обязателен' });
     }
 
+     const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'Пользователь не найден' });
+
+    res.json({ 
+      currentBalance: user.currentBalance,
+      transactions: user.transactions
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;
