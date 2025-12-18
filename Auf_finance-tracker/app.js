@@ -4,4 +4,15 @@ import connectDB from "./db/index.js";
 import balanceRoutes from "./routes/balanceRoutes.js";
 
 dotenv.config();
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/projectFin-tr";
+connectDB();
+
+const app = express();
+app.use(express.json());
+
+app.use('/api' , balanceRoutes);
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Сервер запущен");
+});
+    
+    
