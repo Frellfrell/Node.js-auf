@@ -100,4 +100,12 @@ router.post('/add-expense', async (req, res) => {
     }
 });
 
+router.get('/balance', async (req, res) => {
+  try {
+    const { userId } = req.query;
+
+    if (!userId) {
+      return res.status(400).json({ message: 'userId обязателен' });
+    }
+
 export default router;
