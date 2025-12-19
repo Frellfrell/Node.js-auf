@@ -9,7 +9,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-app.use('/api' , balanceRoutes);
+app.use('/api', balanceRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("Сервер запущен");
