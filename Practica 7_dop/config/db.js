@@ -1,8 +1,7 @@
 import { Sequelize } from "sequelize";
-import config from "./config.json" assert { type: "json" };
+import dotenv from "dotenv";
 
-const env = "development";
-const dbConfig = config[env];
+dotenv.config();
 
 const sequelize = new Sequelize(
   dbConfig.database,
