@@ -12,3 +12,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
+
+async function startServer() {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connected");
