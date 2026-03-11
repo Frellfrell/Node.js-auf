@@ -3,48 +3,45 @@
 /* @type {import('sequelize-cli').Migration} */
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-   
-      await queryInterface.createTable("Products", {
-
-        id: {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Products', {
+      id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
       },
 
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(255),  // задаем максимальную длину
         allowNull: false,
-        unique: true
+        unique: true,
       },
 
-       price: {
-        type: Sequelize.FLOAT,
-        allowNull: false
+      price: {
+        type: Sequelize.DECIMAL(10, 2),  // точность для цен
+        allowNull: false,
       },
 
-       description: {
-        type: Sequelize.TEXT
-      }, 
+      description: {
+        type: Sequelize.TEXT,
+      },
 
-       createdAt: {
+      createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.NOW,  // устанавливается текущее время по умолчанию
       },
 
       updatedAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
-      }
-
+        defaultValue: Sequelize.NOW,  // будет обновляться с каждым изменением
+      },
     });
   },
 
-  async down (queryInterface, Sequelize) {
-   
-     await queryInterface.dropTable("Products");
-     
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Products');
+  },
 };
