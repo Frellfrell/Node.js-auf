@@ -12,13 +12,13 @@ async function testOneToMany() {
     });
 
     await Product.create({
-      name: "iPhone",
+      name: "Pudra",
       price: 1200,
       categoryName: "Cosmetics",
     });
 
     await Product.create({
-      name: "Laptop",
+      name: "Creme",
       price: 2000,
       categoryName: "Cosmetics",
     });
