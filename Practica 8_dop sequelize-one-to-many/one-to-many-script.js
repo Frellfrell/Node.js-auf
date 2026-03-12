@@ -25,7 +25,7 @@ async function testOneToMany() {
 
     const result = await Category.findOne({
       where: { name: "Cosmetics" },
-      include: Product,
+      include: [Product],
     });
 
     console.log(JSON.stringify(result, null, 2));
