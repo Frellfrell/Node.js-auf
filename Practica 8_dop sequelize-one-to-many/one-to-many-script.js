@@ -5,7 +5,7 @@ async function testOneToMany() {
     await sequelize.authenticate();
     console.log("DB connected");
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
 
     const category = await Category.create({
       name: "Cosmetics",
