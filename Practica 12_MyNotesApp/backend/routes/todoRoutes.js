@@ -42,18 +42,14 @@ router.put('/todos/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/todos/:id — удалить задачу
-router.delete("/:id", async (req, res) => {
+// DELETE  — удалить задачу
+router.delete("/todos/:id", async (req, res) => {
   try {
     await Todo.findByIdAndDelete(req.params.id);
-    res.status(204).end();
+   res.json({ message: 'Удалено' });
   } catch (err) {
     res.status(500).json({ message: 'Ошибка при удалении' });
   }
-});
-  todos = todos.filter((t) => t.id !== id);
-  writeTodos(todos);
-  res.status(204).end();
 });
 
 export default router;
