@@ -101,3 +101,16 @@
     background 0.2s,
     transform 0.1s;
 }
+.completeButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.completeButton:hover {
+  background-color: #45a049;
+}
