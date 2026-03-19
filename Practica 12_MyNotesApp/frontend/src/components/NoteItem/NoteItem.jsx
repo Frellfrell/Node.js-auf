@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { delete_Note, update_Note } from "../../redux/notesSlice";
+import { deleteTodo, updateTodo } from "../../redux/App.jsx";
 import styles from "./NoteItem.module.css";
 
-function NoteItem({ note }) {
+function NoteItem({ todo }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(note.title);
-  const [text, setText] = useState(note.text);
+  const [title, setTitle] = useState(todo.title);
+  const [text, setText] = useState(todo.text);
 
   const handleSave = () => {
-    dispatch(update_Note({ id: note.id, title, text }));
+    dispatch(updateTodo({ id: todo.id, title, text }));
     setIsEditing(false);
   };
 
@@ -36,7 +36,7 @@ function NoteItem({ note }) {
             </button>
             <button
               className={styles.deleteButton}
-              onClick={() => dispatch(delete_Note(note.id))}
+              onClick={() => dispatch(deleteTodo(todo.id))}
             >
               🗑 Delete
             </button>
@@ -44,8 +44,8 @@ function NoteItem({ note }) {
         </div>
       ) : (
         <div className={styles.viewContainer}>
-          <h3 className={styles.noteTitle}>{note.title}</h3>
-          <p className={styles.noteText}>{note.text}</p>
+          <h3 className={styles.noteTitle}>{todo.title}</h3>
+          <p className={styles.noteText}>{todo.text}</p>
           <div className={styles.actions}>
             <button
               className={styles.editButton}
@@ -55,7 +55,7 @@ function NoteItem({ note }) {
             </button>
             <button
               className={styles.deleteButton}
-              onClick={() => dispatch(delete_Note(note.id))}
+              onClick={() => dispatch(deleteTodo(todo.id))}
             >
               🗑
             </button>
