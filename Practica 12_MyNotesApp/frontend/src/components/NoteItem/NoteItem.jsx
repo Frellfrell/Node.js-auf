@@ -24,7 +24,7 @@ function NoteItem({ todo }) {
     dispatch(
       updateTodo({
         id: todo._id,
-        todo: { title, text, complete: !complete },
+        todo: { title, text, complete: !todo.complete },
       }),
     );
   };
@@ -71,10 +71,9 @@ function NoteItem({ todo }) {
             <button className={styles.deleteButton} onClick={handleDelete}>
               🗑
             </button>
-            <button
-              className={styles.completeButton}
-              onClick={toggleComplete}
-            ></button>
+            <button className={styles.completeButton} onClick={toggleComplete}>
+              {todo.complete ? "✅ Completed" : "⬜ Complete"}
+            </button>
           </div>
         </div>
       )}
