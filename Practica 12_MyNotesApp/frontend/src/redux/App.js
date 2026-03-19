@@ -8,16 +8,17 @@ import axios from "axios";
 const API_URL = "http://localhost:5000/api/todos";
 
 // Async actions
+// Получение всех задач
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   const res = await axios.get(API_URL);
   return res.data;
 });
-
+// Добавление задачи
 export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   const res = await axios.post(API_URL, todo);
   return res.data;
 });
-
+// Обновление задачи
 export const updateTodo = createAsyncThunk(
   "todos/updateTodo",
   async ({ id, todo }) => {
@@ -25,7 +26,7 @@ export const updateTodo = createAsyncThunk(
     return res.data;
   },
 );
-
+// Удаление задачи
 export const deleteTodo = createAsyncThunk("todos/deleteTodo", async (id) => {
   await axios.delete(`${API_URL}/${id}`);
   return id;
@@ -43,7 +44,7 @@ const notesSlice = createSlice({
         state.push(action.payload);
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
-        const index = state.findIndex((n) => n.id === action.payload._id);
+        const index = state.findIndex((n) => n._id === action.payload._id);
         if (index !== -1) state[index] = action.payload;
       })
       .addCase(deleteTodo.fulfilled, (state, action) =>
@@ -52,6 +53,7 @@ const notesSlice = createSlice({
   },
 });
 
+// Store
 export const store = configureStore({
   reducer: {
     todos: notesSlice.reducer,
