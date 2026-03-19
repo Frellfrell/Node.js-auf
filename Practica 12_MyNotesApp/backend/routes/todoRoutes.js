@@ -1,9 +1,7 @@
 import express from "express";
-const Todo = require("../models/Todo");
-const router = express.Router();
+impport Todo from "../models/Todo.js";
 
 const router = express.Router();
-const DATA_FILE = "./data/todos.json";
 
 //  читаем JSON
 const readTodos = () => {
