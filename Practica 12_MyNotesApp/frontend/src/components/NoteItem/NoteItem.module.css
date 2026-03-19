@@ -1,0 +1,103 @@
+.note {
+  background-color: #fffaf3;
+  border: 1px solid #e0c097;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 12px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Для режима редактирования */
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Для режима просмотра */
+.viewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Поля редактирования */
+.input,
+.textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1bfa7;
+  font-size: 1rem;
+}
+
+/* Общие кнопки */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end; /* кнопки справа */
+}
+
+/* Кнопки для редактирования и сохранения */
+.saveButton,
+.editButton,
+.deleteButton {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.saveButton {
+  background-color: #c5a880;
+  color: white;
+}
+.saveButton:hover {
+  background-color: #b08a62;
+}
+
+.editButton {
+  background-color: #f0d6b2;
+}
+.editButton:hover {
+  background-color: #e6c699;
+}
+
+.deleteButton {
+  background-color: #d88c8c;
+  color: white;
+}
+.deleteButton:hover {
+  background-color: #c96f6f;
+}
+
+/* Заголовок и текст */
+.noteTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.noteText {
+  font-size: 1rem;
+}
+.noteButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.updateButton,
+.deleteButton {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
