@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/notesSlice";
+import { addTodo } from "../../redux/App";
 import styles from "./NoteForm.module.css";
 
 function NoteForm() {
