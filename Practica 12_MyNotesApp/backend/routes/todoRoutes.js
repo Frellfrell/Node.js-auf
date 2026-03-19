@@ -27,47 +27,30 @@ router.get('/todos', async (req, res) => {
   }
 });
 
-//  записываем JSON
-const writeTodos = (todos) => {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(todos, null, 2));
-};
 
-// GET /api/todos — список всех задач
-router.get("/", (req, res) => {
-  const todos = readTodos();
-  res.json(todos);
-});
-
-// POST /api/todos — добавить задачу
-router.post("/", (req, res) => {
-  const { title, text } = req.body;
-  if (!title || !text)
-    return res.status(400).json({ error: "Title and text required" });
-
-  const todos = readTodos();
-  const newTodo = { id: uuidv4(), title, text, complete: false };
-  todos.push(newTodo);
-  writeTodos(todos);
-  res.status(201).json(newTodo);
-});
-
-// POST /api/todos — добавить задачу
-router.post("/", (req, res) => {
-  const { title, text } = req.body;
-  if (!title || !text)
-    return res.status(400).json({ error: "Title and text required" });
-
-  const todos = readTodos();
-  const newTodo = { id: uuidv4(), title, text, complete: false };
-  todos.push(newTodo);
-  writeTodos(todos);
-  res.status(201).json(newTodo);
+// UPDATE
+router.put('/todos/:id', async (req, res) => {
+  try {
+    const updated = await Todo.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: 'Ошибка при обновлении' });
+  }
 });
 
 // DELETE /api/todos/:id — удалить задачу
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  let todos = readTodos();
+router.delete("/:id", async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: 'Ошибка при удалении' });
+  }
+});
   todos = todos.filter((t) => t.id !== id);
   writeTodos(todos);
   res.status(204).end();
