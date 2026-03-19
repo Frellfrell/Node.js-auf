@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import NoteForm from "./components/NoteForm/NoteForm";
-import NoteList from "./components/NoteList/NoteList";
+import NoteList from "./components/Notelist/NoteList";
 import styles from "./App.module.css";
 
 const NotesApp = () => {
