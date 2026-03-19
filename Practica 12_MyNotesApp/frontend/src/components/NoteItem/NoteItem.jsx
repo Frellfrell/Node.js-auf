@@ -10,7 +10,7 @@ function NoteItem({ todo }) {
   const [text, setText] = useState(todo.text);
 
   const handleSave = () => {
-    dispatch(updateTodo({ id: todo.id, title, text }));
+    dispatch(updateTodo({ id: todo._id, title, text }));
     setIsEditing(false);
   };
 
@@ -36,7 +36,7 @@ function NoteItem({ todo }) {
             </button>
             <button
               className={styles.deleteButton}
-              onClick={() => dispatch(deleteTodo(todo.id))}
+              onClick={() => dispatch(deleteTodo(todo._id))}
             >
               🗑 Delete
             </button>
