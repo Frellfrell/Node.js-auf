@@ -2,10 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import NotesApp from "./NotesApp";
 import "./App.module.css";
-import App from "./redux/App.jsx";
+import { store } from "./redux/App.jsx";
+import { Provider } from "react-redux";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <NotesApp />
+    </Provider>
   </StrictMode>,
 );
