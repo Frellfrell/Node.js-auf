@@ -25,3 +25,16 @@ router.get("/", (req, res) => {
   const todos = readTodos();
   res.json(todos);
 });
+
+// POST /api/todos — добавить задачу
+router.post("/", (req, res) => {
+  const { title, text } = req.body;
+  if (!title || !text)
+    return res.status(400).json({ error: "Title and text required" });
+
+  const todos = readTodos();
+  const newTodo = { id: uuidv4(), title, text, complete: false };
+  todos.push(newTodo);
+  writeTodos(todos);
+  res.status(201).json(newTodo);
+});
