@@ -54,6 +54,6 @@ const notesSlice = createSlice({
 
 export const store = configureStore({
   reducer: {
-    notes: notesSlice.reducer,
+    todos: notesSlice.reducer,
   },
 });

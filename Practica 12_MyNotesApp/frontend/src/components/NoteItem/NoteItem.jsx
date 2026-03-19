@@ -55,7 +55,7 @@ function NoteItem({ todo }) {
             </button>
             <button
               className={styles.deleteButton}
-              onClick={() => dispatch(deleteTodo(todo.id))}
+              onClick={() => dispatch(deleteTodo(todo._id))}
             >
               🗑
             </button>
