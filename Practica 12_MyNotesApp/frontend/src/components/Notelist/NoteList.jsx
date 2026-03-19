@@ -13,7 +13,7 @@ function NoteList() {
     dispatch(fetchTodos());
   }, [dispatch]);
 
-  if (todos.length === 0) {
+  if (!todos || todos.length === 0) {
     return <p className={styles.empty}>NO Notes Available</p>;
   }
 
