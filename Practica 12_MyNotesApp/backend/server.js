@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import todosRouter from "./routes/todos.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -17,6 +18,6 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/todos", todosRouter);
+app.use("/api", todosRouter);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
