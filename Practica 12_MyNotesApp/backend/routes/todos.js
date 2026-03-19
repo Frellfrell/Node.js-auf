@@ -38,3 +38,27 @@ router.post("/", (req, res) => {
   writeTodos(todos);
   res.status(201).json(newTodo);
 });
+
+// POST /api/todos — добавить задачу
+router.post("/", (req, res) => {
+  const { title, text } = req.body;
+  if (!title || !text)
+    return res.status(400).json({ error: "Title and text required" });
+
+  const todos = readTodos();
+  const newTodo = { id: uuidv4(), title, text, complete: false };
+  todos.push(newTodo);
+  writeTodos(todos);
+  res.status(201).json(newTodo);
+});
+
+// DELETE /api/todos/:id — удалить задачу
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  let todos = readTodos();
+  todos = todos.filter((t) => t.id !== id);
+  writeTodos(todos);
+  res.status(204).end();
+});
+
+export default router;
