@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NoteItem from "../NoteItem/NoteItem";
-import { fetchTodos } from "../../redux/App.jsx";
+import { fetchTodos } from "../../redux/App.js";
 import styles from "./NoteList.module.css";
 import { useEffect } from "react";
 
