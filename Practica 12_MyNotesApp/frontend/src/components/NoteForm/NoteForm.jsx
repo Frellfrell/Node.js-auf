@@ -12,7 +12,9 @@ function NoteForm() {
     e.preventDefault();
     if (!title.trim() || !text.trim()) return;
 
+    // Добавляем задачу  в Redux
     dispatch(addTodo({ title, text }));
+    // Очищаем форму
     setTitle("");
     setText("");
   };
