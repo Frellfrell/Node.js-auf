@@ -17,15 +17,15 @@ router.post('/todos', async (req, res) => {
   }
 });
 
-//  читаем JSON
-const readTodos = () => {
+//  читаем 
+router.get('/todos', async (req, res) => {
   try {
-    const data = fs.readFileSync(DATA_FILE);
-    return JSON.parse(data);
-  } catch {
-    return [];
+    const todos = await Todo.find();
+    res.json(todos);
+  } catch (err) {
+    res.status(500).json({ message: 'Ошибка при получении' });
   }
-};
+});
 
 //  записываем JSON
 const writeTodos = (todos) => {
