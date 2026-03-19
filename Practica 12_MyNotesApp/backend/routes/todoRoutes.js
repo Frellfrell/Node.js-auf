@@ -3,6 +3,20 @@ impport Todo from "../models/Todo.js";
 
 const router = express.Router();
 
+
+
+// CREATE
+router.post('/todos', async (req, res) => {
+  try {
+    const { title, text } = req.body;
+    const todo = new Todo({ title, text });
+    await todo.save();
+    res.status(201).json(todo);
+  } catch (err) {
+    res.status(500).json({ message: 'Ошибка при создании' });
+  }
+});
+
 //  читаем JSON
 const readTodos = () => {
   try {
