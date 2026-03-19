@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { add_Note } from "../../redux/notesSlice";
+import { addTodo } from "../../redux/notesSlice";
 import styles from "./NoteForm.module.css";
 
 function NoteForm() {
@@ -12,7 +12,7 @@ function NoteForm() {
     e.preventDefault();
     if (!title.trim() || !text.trim()) return;
 
-    dispatch(add_Note({ title, text }));
+    dispatch(addTodo({ title, text }));
     setTitle("");
     setText("");
   };
