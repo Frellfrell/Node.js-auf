@@ -74,10 +74,7 @@ function NoteItem({ todo }) {
             <button
               className={styles.completeButton}
               onClick={toggleComplete}
-              style={{ backgroundColor: complete ? "#c5a880" : "#f0d6b2" }}
-            >
-              {complete ? "✅ Done" : "⬜ Pending"}
-            </button>
+            ></button>
           </div>
         </div>
       )}
