@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodo, updateTodo } from "../../redux/App.jsx";
+import { deleteTodo, updateTodo } from "../../redux/App.js";
 import styles from "./NoteItem.module.css";
 
 function NoteItem({ todo }) {
