@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
+import NoteForm from "./components/NoteForm/NoteForm";
+import NoteList from "./components/NoteList/NoteList";
+import styles from "./NotesApp.module.css";
 
-function App() {
+const NotesApp = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <Header />
+      <Main>
+        <div className={styles.notesCard}>
+          <NoteForm />
+          <NoteList />
+        </div>
+      </Main>
+      <Footer />
     </div>
   );
-}
+};
 
-export default App;
+export default NotesApp;
