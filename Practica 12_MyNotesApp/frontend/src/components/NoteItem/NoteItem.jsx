@@ -8,10 +8,25 @@ function NoteItem({ todo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(todo.title);
   const [text, setText] = useState(todo.text);
+  const [complete, setComplete] = useState(todo.complete);
 
   const handleSave = () => {
-    dispatch(updateTodo({ id: todo._id, title, text }));
+    dispatch(updateTodo({ id: todo._id, title, text, complete }));
     setIsEditing(false);
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteTodo(todo._id));
+  };
+
+  const toggleComplete = () => {
+    setComplete((prev) => !prev);
+    dispatch(
+      updateTodo({
+        id: todo._id,
+        todo: { title, text, complete: !complete },
+      }),
+    );
   };
 
   return (
@@ -44,8 +59,8 @@ function NoteItem({ todo }) {
         </div>
       ) : (
         <div className={styles.viewContainer}>
-          <h3 className={styles.noteTitle}>{todo.title}</h3>
-          <p className={styles.noteText}>{todo.text}</p>
+          <h3 className={styles.noteTitle}>{title}</h3>
+          <p className={styles.noteText}>{text}</p>
           <div className={styles.actions}>
             <button
               className={styles.editButton}
@@ -53,11 +68,15 @@ function NoteItem({ todo }) {
             >
               ✏️
             </button>
-            <button
-              className={styles.deleteButton}
-              onClick={() => dispatch(deleteTodo(todo._id))}
-            >
+            <button className={styles.deleteButton} onClick={handleDelete}>
               🗑
+            </button>
+            <button
+              className={styles.completeButton}
+              onClick={toggleComplete}
+              style={{ backgroundColor: complete ? "#c5a880" : "#f0d6b2" }}
+            >
+              {complete ? "✅ Done" : "⬜ Pending"}
             </button>
           </div>
         </div>
