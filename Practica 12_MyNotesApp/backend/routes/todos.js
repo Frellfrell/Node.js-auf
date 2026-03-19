@@ -14,3 +14,14 @@ const readTodos = () => {
     return [];
   }
 };
+
+//  записываем JSON
+const writeTodos = (todos) => {
+  fs.writeFileSync(DATA_FILE, JSON.stringify(todos, null, 2));
+};
+
+// GET /api/todos — список всех задач
+router.get("/", (req, res) => {
+  const todos = readTodos();
+  res.json(todos);
+});
