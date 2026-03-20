@@ -25,7 +25,7 @@ const orderSchema = new mongoose.Schema({
     unique: true,
     match: /^ORD-\d{8}-\d{6}$/,
   },
-   customer: {
+  customer: {
     name: { type: String, required: true },
     email: {
       type: String,
@@ -38,3 +38,20 @@ const orderSchema = new mongoose.Schema({
       match: /^[0-9+\-() ]*$/,
     },
   },
+  items: {
+    type: [itemSchema],
+    required: true,
+    validate: [(arr) => arr.length > 0, "Минимум 1 товар"],
+  },
+  subtotal: Number,
+  tax: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  total: Number,
+  status: {
+    type: String,
+    enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
+  },
+});
