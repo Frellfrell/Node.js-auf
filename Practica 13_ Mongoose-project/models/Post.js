@@ -17,3 +17,8 @@ const postSchema = new mongoose.Schema({
     enum: ["draft", "published", "archived"],
     default: "draft",
   },
+  views: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
