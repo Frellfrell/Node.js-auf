@@ -32,3 +32,6 @@ const jobListingSchema = new mongoose.Schema({
       validator: function (v) {
         return v > this.salaryMin;
       },
+       message: "salaryMax должен быть больше salaryMin",
+    },
+  },
