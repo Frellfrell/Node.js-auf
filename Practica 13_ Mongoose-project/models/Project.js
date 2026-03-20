@@ -25,3 +25,13 @@ const projectSchema = new mongoose.Schema({
         message: "endDate должен быть больше startDate",
     },
   },
+   budget: {
+    type: Number,
+    required: true,
+    min: 1000,
+  },
+  status: {
+    type: String,
+    enum: ["planning", "active", "completed", "cancelled"],
+    required: true,
+  },
