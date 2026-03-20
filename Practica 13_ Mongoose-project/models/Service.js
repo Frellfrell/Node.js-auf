@@ -22,3 +22,13 @@ const serviceSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+   category: {
+    type: String,
+    enum: ["consulting", "development", "support", "training"],
+    required: true,
+  },
+  level: {
+    type: String,
+    enum: ["basic", "premium", "enterprise"],
+    required: true,
+  },
