@@ -20,3 +20,15 @@ const jobListingSchema = new mongoose.Schema({
       "От 1 до 10 требований",
     ],
   },
+   salaryMin: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  salaryMax: {
+    type: Number,
+    required: true,
+    validate: {
+      validator: function (v) {
+        return v > this.salaryMin;
+      },
