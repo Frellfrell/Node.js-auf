@@ -6,7 +6,7 @@ const clientSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
   },
-   contactPerson: {
+  contactPerson: {
     type: String,
     required: true,
     minlength: 3,
@@ -28,3 +28,10 @@ const clientSchema = new mongoose.Schema({
     zipCode: { type: String, required: true },
     country: { type: String, required: true },
   },
+  contractSigned: Date,
+  status: {
+    type: String,
+    enum: ["active", "inactive", "pending"],
+    default: "pending",
+  },
+});
