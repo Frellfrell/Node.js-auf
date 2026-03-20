@@ -39,3 +39,11 @@ const jobListingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  remote: {
+    type: Boolean,
+    default: false,
+  },
+  postedDate: {
+    type: Date,
+    default: Date.now,
+  },
