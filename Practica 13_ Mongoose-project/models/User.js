@@ -15,3 +15,9 @@ const userSchema = new mongoose.Schema({
     unique: true,
     match: /^\S+@\S+\.\S+$/,
   },
+   age: {
+    type: Number,
+    min: 13,
+    max: 120,
+    required: true,
+  },
