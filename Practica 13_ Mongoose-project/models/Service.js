@@ -22,7 +22,7 @@ const serviceSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
-   category: {
+  category: {
     type: String,
     enum: ["consulting", "development", "support", "training"],
     required: true,
@@ -32,3 +32,14 @@ const serviceSchema = new mongoose.Schema({
     enum: ["basic", "premium", "enterprise"],
     required: true,
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  clients: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
+    },
+  ],
+});
