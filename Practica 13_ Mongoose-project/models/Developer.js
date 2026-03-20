@@ -6,13 +6,13 @@ const developerSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
-   email: {
+  email: {
     type: String,
     required: true,
     unique: true,
     match: /^\S+@\S+\.\S+$/,
   },
-   experience: {
+  experience: {
     type: Number,
     required: true,
     min: 0,
@@ -22,7 +22,7 @@ const developerSchema = new mongoose.Schema({
     type: [String],
     required: true,
     validate: [
-      arr => arr.length >= 1 && arr.length <= 10,
+      (arr) => arr.length >= 1 && arr.length <= 10,
       "От 1 до 10 навыков",
     ],
   },
@@ -32,9 +32,12 @@ const developerSchema = new mongoose.Schema({
     min: 10,
     max: 200,
   },
- hourlyRate: {
-    type: Number,
-    required: true,
-    min: 10,
-    max: 200,
+  available: {
+    type: Boolean,
+    default: true,
   },
+  githubProfile: {
+    type: String,
+    match: /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/,
+  },
+});
