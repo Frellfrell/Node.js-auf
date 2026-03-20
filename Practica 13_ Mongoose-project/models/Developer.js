@@ -12,3 +12,9 @@ const developerSchema = new mongoose.Schema({
     unique: true,
     match: /^\S+@\S+\.\S+$/,
   },
+   experience: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 50,
+  },
