@@ -45,3 +45,6 @@ productSchema.pre("save", function (next) {
   this.finalPrice = this.price - (this.price * this.discount) / 100;
   next();
 });
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
