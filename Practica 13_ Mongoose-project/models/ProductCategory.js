@@ -7,7 +7,7 @@ const productCategorySchema = new mongoose.Schema({
     unique: true,
     minlength: 2,
   },
-   slug: {
+  slug: {
     type: String,
     required: true,
     unique: true,
@@ -17,3 +17,14 @@ const productCategorySchema = new mongoose.Schema({
     type: String,
     maxlength: 500,
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
+  displayOrder: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 999,
+  },
+});
