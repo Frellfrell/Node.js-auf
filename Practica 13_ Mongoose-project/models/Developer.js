@@ -18,3 +18,11 @@ const developerSchema = new mongoose.Schema({
     min: 0,
     max: 50,
   },
+  skills: {
+    type: [String],
+    required: true,
+    validate: [
+      arr => arr.length >= 1 && arr.length <= 10,
+      "От 1 до 10 навыков",
+    ],
+  },
