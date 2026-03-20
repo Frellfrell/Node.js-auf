@@ -13,3 +13,8 @@ const companySchema = new mongoose.Schema({
     unique: true,
     match: /^\d{10,12}$/,
   },
+  industry: {
+    type: String,
+    enum: ["IT", "Finance", "Healthcare", "Education", "Retail"],
+    required: true,
+  },
