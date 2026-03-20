@@ -28,3 +28,7 @@ const companySchema = new mongoose.Schema({
     match: /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/,
   },
 });
+
+const Company = mongoose.model("Company", companySchema);
+
+export default Company;
