@@ -7,3 +7,12 @@ const projectSchema = new mongoose.Schema({
     unique: true,
     minlength: 3,
   },
+   description: {
+    type: String,
+    required: true,
+    minlength: 20,
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
