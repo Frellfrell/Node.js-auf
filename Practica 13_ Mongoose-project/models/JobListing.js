@@ -35,3 +35,7 @@ const jobListingSchema = new mongoose.Schema({
        message: "salaryMax должен быть больше salaryMin",
     },
   },
+   location: {
+    type: String,
+    required: true,
+  },
