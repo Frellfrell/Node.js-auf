@@ -28,3 +28,10 @@ const productCategorySchema = new mongoose.Schema({
     max: 999,
   },
 });
+
+const ProductCategory = mongoose.model(
+  "ProductCategory",
+  productCategorySchema,
+);
+
+export default ProductCategory;
