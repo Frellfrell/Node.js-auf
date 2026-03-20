@@ -8,3 +8,9 @@ const app = express();
 app.use(express.json());
 
 connectDB();
+
+app.get("/", (req, res) => {
+  res.send("API работает ");
+});
+
+const PORT = process.env.PORT || 5000;
