@@ -26,3 +26,9 @@ const developerSchema = new mongoose.Schema({
       "От 1 до 10 навыков",
     ],
   },
+  hourlyRate: {
+    type: Number,
+    required: true,
+    min: 10,
+    max: 200,
+  },
