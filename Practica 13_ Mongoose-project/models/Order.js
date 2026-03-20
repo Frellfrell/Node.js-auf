@@ -25,3 +25,16 @@ const orderSchema = new mongoose.Schema({
     unique: true,
     match: /^ORD-\d{8}-\d{6}$/,
   },
+   customer: {
+    name: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      match: /^\S+@\S+\.\S+$/,
+    },
+    phone: {
+      type: String,
+      required: true,
+      match: /^[0-9+\-() ]*$/,
+    },
+  },
