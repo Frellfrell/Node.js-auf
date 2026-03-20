@@ -7,7 +7,7 @@ const companySchema = new mongoose.Schema({
     unique: true,
     minlength: 2,
   },
-   taxId: {
+  taxId: {
     type: String,
     required: true,
     unique: true,
@@ -18,3 +18,13 @@ const companySchema = new mongoose.Schema({
     enum: ["IT", "Finance", "Healthcare", "Education", "Retail"],
     required: true,
   },
+  employeeCount: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  website: {
+    type: String,
+    match: /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/,
+  },
+});
