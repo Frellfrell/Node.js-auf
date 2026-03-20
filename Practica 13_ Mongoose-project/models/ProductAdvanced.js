@@ -40,3 +40,8 @@ const productSchema = new mongoose.Schema({
     validate: (v) => v.size > 0,
   },
 });
+
+productSchema.pre("save", function (next) {
+  this.finalPrice = this.price - (this.price * this.discount) / 100;
+  next();
+});
