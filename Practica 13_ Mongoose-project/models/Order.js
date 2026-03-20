@@ -55,3 +55,8 @@ const orderSchema = new mongoose.Schema({
     enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
   },
 });
+orderSchema.pre("save", function (next) {
+  this.items.forEach(item => {
+    item.totalPrice = item.quantity * item.unitPrice;
+  });
+
