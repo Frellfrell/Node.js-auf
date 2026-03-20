@@ -63,3 +63,7 @@ const jobListingSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+const JobListing = mongoose.model("JobListing", jobListingSchema);
+
+export default JobListing;
