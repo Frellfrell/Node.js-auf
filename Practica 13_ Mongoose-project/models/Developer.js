@@ -6,3 +6,9 @@ const developerSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
+   email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^\S+@\S+\.\S+$/,
+  },
