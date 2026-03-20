@@ -41,3 +41,7 @@ const developerSchema = new mongoose.Schema({
     match: /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/,
   },
 });
+
+const Developer = mongoose.model("Developer", developerSchema);
+
+export default Developer;
