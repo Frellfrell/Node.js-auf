@@ -22,3 +22,6 @@ const projectSchema = new mongoose.Schema({
       validator: function (v) {
         return !v || v > this.startDate;
       },
+        message: "endDate должен быть больше startDate",
+    },
+  },
