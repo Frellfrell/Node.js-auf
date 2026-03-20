@@ -16,11 +16,11 @@ const jobListingSchema = new mongoose.Schema({
     type: [String],
     required: true,
     validate: [
-      arr => arr.length >= 1 && arr.length <= 10,
+      (arr) => arr.length >= 1 && arr.length <= 10,
       "От 1 до 10 требований",
     ],
   },
-   salaryMin: {
+  salaryMin: {
     type: Number,
     required: true,
     min: 0,
@@ -32,10 +32,10 @@ const jobListingSchema = new mongoose.Schema({
       validator: function (v) {
         return v > this.salaryMin;
       },
-       message: "salaryMax должен быть больше salaryMin",
+      message: "salaryMax должен быть больше salaryMin",
     },
   },
-   location: {
+  location: {
     type: String,
     required: true,
   },
@@ -47,13 +47,19 @@ const jobListingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-   expiryDate: {
+  expiryDate: {
     type: Date,
     required: true,
     validate: {
       validator: function (v) {
         return v > this.postedDate;
       },
-       message: "expiryDate должен быть больше postedDate",
+      message: "expiryDate должен быть больше postedDate",
     },
   },
+  company: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Company",
+    required: true,
+  },
+});
