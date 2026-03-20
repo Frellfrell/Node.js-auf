@@ -7,7 +7,7 @@ const projectSchema = new mongoose.Schema({
     unique: true,
     minlength: 3,
   },
-   description: {
+  description: {
     type: String,
     required: true,
     minlength: 20,
@@ -22,10 +22,10 @@ const projectSchema = new mongoose.Schema({
       validator: function (v) {
         return !v || v > this.startDate;
       },
-        message: "endDate должен быть больше startDate",
+      message: "endDate должен быть больше startDate",
     },
   },
-   budget: {
+  budget: {
     type: Number,
     required: true,
     min: 1000,
@@ -35,3 +35,15 @@ const projectSchema = new mongoose.Schema({
     enum: ["planning", "active", "completed", "cancelled"],
     required: true,
   },
+  technologies: {
+    type: [String],
+    required: true,
+    validate: [(arr) => arr.length >= 1, "Минимум 1 технология"],
+  },
+  developers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Developer",
+    },
+  ],
+});
