@@ -12,3 +12,8 @@ const postSchema = new mongoose.Schema({
     minlength: 20,
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["draft", "published", "archived"],
+    default: "draft",
+  },
