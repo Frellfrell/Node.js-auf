@@ -1,1 +1,1 @@
-User.
+import mongoose from "mongoose";
