@@ -56,7 +56,11 @@ const orderSchema = new mongoose.Schema({
   },
 });
 orderSchema.pre("save", function (next) {
-  this.items.forEach(item => {
+  this.items.forEach((item) => {
     item.totalPrice = item.quantity * item.unitPrice;
   });
 
+  this.subtotal = this.items.reduce((sum, i) => sum + i.totalPrice, 0);
+  this.total = this.subtotal + this.tax;
+  next();
+});
