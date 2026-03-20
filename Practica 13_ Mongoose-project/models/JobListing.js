@@ -7,3 +7,8 @@ const jobListingSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 100,
   },
+  description: {
+    type: String,
+    required: true,
+    minlength: 50,
+  },
