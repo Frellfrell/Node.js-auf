@@ -5,3 +5,7 @@ const studentSchema = new mongoose.Schema({
   email: String,
   courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 });
+
+const Student = mongoose.model("Student", studentSchema);
+
+export default Student;
