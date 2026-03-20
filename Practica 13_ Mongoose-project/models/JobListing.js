@@ -54,3 +54,6 @@ const jobListingSchema = new mongoose.Schema({
       validator: function (v) {
         return v > this.postedDate;
       },
+       message: "expiryDate должен быть больше postedDate",
+    },
+  },
