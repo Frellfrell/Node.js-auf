@@ -17,3 +17,15 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0.01,
   },
+  discount: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  finalPrice: Number,
+  quantity: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
