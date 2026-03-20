@@ -16,3 +16,9 @@ const projectSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  endDate: {
+    type: Date,
+    validate: {
+      validator: function (v) {
+        return !v || v > this.startDate;
+      },
