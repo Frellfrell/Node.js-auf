@@ -17,3 +17,11 @@ const itemSchema = new mongoose.Schema({
   },
   totalPrice: Number,
 });
+
+const orderSchema = new mongoose.Schema({
+  orderNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^ORD-\d{8}-\d{6}$/,
+  },
