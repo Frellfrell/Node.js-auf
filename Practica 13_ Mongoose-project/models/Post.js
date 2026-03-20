@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
     maxlength: 200,
     required: true,
   },
-   content: {
+  content: {
     type: String,
     minlength: 20,
     required: true,
@@ -24,5 +24,11 @@ const postSchema = new mongoose.Schema({
   },
   tags: {
     type: [String],
-    validate: [arr => arr.length <= 5, "Максимум 5 тегов"],
+    validate: [(arr) => arr.length <= 5, "Максимум 5 тегов"],
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+});
