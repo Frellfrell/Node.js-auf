@@ -47,3 +47,10 @@ const jobListingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+   expiryDate: {
+    type: Date,
+    required: true,
+    validate: {
+      validator: function (v) {
+        return v > this.postedDate;
+      },
