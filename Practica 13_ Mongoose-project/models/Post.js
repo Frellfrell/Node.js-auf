@@ -22,3 +22,7 @@ const postSchema = new mongoose.Schema({
     default: 0,
     min: 0,
   },
+  tags: {
+    type: [String],
+    validate: [arr => arr.length <= 5, "Максимум 5 тегов"],
+  },
