@@ -8,3 +8,7 @@ const productSchema = new mongoose.Schema({
     ref: "Category",
   },
 });
+
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
