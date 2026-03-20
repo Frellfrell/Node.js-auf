@@ -35,3 +35,7 @@ const clientSchema = new mongoose.Schema({
     default: "pending",
   },
 });
+
+const Client = mongoose.model("Client", clientSchema);
+
+export default Client;
