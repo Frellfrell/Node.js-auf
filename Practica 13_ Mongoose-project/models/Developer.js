@@ -32,3 +32,9 @@ const developerSchema = new mongoose.Schema({
     min: 10,
     max: 200,
   },
+ hourlyRate: {
+    type: Number,
+    required: true,
+    min: 10,
+    max: 200,
+  },
