@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
-   sku: {
+  sku: {
     type: String,
     required: true,
     unique: true,
@@ -29,3 +29,14 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductCategory",
+    required: true,
+  },
+  specifications: {
+    type: Map,
+    of: String,
+    validate: (v) => v.size > 0,
+  },
+});
