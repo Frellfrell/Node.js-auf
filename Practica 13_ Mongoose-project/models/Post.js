@@ -7,3 +7,8 @@ const postSchema = new mongoose.Schema({
     maxlength: 200,
     required: true,
   },
+   content: {
+    type: String,
+    minlength: 20,
+    required: true,
+  },
