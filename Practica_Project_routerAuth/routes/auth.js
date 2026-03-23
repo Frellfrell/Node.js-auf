@@ -15,10 +15,10 @@ authRouter.post("/register", async (req, res) => {
       .json({ message: "Username and password are required" });
   }
 
-  const db = getDb();
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
   try {
+    const db = getDb();
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
     await db
       .collection("users")
       .insertOne({ username, password: hashedPassword });
@@ -30,19 +30,25 @@ authRouter.post("/register", async (req, res) => {
   }
 });
 
-authRouter.post("/login", async (_, res) => {
-  const db = getDb();
-  const { username, password } = req.body;
+authRouter.post("/login", async (req, res) => {
+  try {
+    const db = getDb();
+    const { username, password } = req.body;
 
-  const user = await db.collection("users").findOne({ username });
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(400).json({ message: "Invalid username or password" });
+    const user = await db.collection("users").findOne({ username });
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ message: "Invalid username or password" });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "2h",
-  });
-  res.status(200).json({ token });
 });
 
 export default authRouter;
