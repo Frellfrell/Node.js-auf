@@ -7,7 +7,6 @@ const { getDb } = require("../db");
 const authRouter = Router();
 
 authRouter.post("/register", async (_, res) => {
-  
   const { username, password } = req.body;
 
   // Валидация наличия полей
@@ -26,15 +25,16 @@ authRouter.post("/register", async (_, res) => {
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   try {
-  await db
-    .collection("users")
-    .insertOne({ username, password: hashedPassword });
-  // Возвращаем статус 201 и сообщение об успешной регистрации
-  res.status(201).json({ message: "User registered successfully" });
-} catch (error) {
-  console.error("Error registering user:", error);
-  res.status(500).json({ message: "Internal server error" });
-}
+    await db
+      .collection("users")
+      .insertOne({ username, password: hashedPassword });
+    // Возвращаем статус 201 и сообщение об успешной регистрации
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("Error registering user:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 authRouter.post("/login", async (_, res) => {
   const db = getDb();
