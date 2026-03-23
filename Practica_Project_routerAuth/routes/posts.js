@@ -24,5 +24,7 @@ postsRouter.post("/", authMiddleware, async (req, res) => {
   };
 
   await db.collection("posts").insertOne(newPost);
-  res.status(201).json({ message: "Пост добавлен", post: newPost });
+  res.status(201).json({ message: "Post created", post: newPost });
 });
+
+export default postsRouter;
