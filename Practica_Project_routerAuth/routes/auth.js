@@ -6,6 +6,7 @@ import { getDb } from "../db/index.js";
 const authRouter = Router();
 
 authRouter.post("/register", async (req, res) => {
+  console.log("!!! ЗАПРОС НА РЕГИСТРАЦИЮ ПРИШЕЛ !!!", req.body);
   const { username, password } = req.body;
 
   // Валидация наличия полей
