@@ -11,6 +11,7 @@ const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 3333;
 app.use(express.json());
 app.use("/auth", authRouter);
+app.use("/posts", postsRouter);
 
 connectToDatabase()
   .then(() => {
