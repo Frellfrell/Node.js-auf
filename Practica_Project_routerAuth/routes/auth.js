@@ -41,8 +41,9 @@ authRouter.post("/login", async (_, res) => {
   const { username, password } = req.body;
 
   const user = await db.collection("users").findOne({ username });
-  if (!user)
+  if (!user || !(await bcrypt.compare(password, user.password))) {
     return res.status(400).json({ message: "Invalid username or password" });
+  }
 
   const isPasswordValid = bcrypt.compareSync(password, user.password);
   if (!isPasswordValid)
