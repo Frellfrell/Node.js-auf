@@ -9,7 +9,15 @@ const authRouter = Router();
 authRouter.post("/register", async (_, res) => {
   const db = getDb();
   const { username, password } = req.body;
-  const existingUser = db.collection("users").findOne({ username });
+
+  // Валидация наличия полей
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Username and password are required" });
+  }
+
+  const existingUser = await db.collection("users").findOne({ username });
   if (existingUser) {
     return res.status(400).json({ message: "Username already in use" });
   }
