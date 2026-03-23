@@ -11,7 +11,7 @@ let db;
 export async function connectToDatabase() {
   try {
     await client.connect();
-    db = client.db("authDB");
+    db = client.db("project_router_auth");
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
