@@ -11,14 +11,18 @@ postsRouter.get("/", async (_, res) => {
   res.json(posts);
 });
 
-// Создание поста 
+// Создание поста
 postsRouter.post("/", authMiddleware, async (req, res) => {
-    const { title, content } = req.body;
-    const db = getDb();
+  const { title, content } = req.body;
+  const db = getDb();
 
-    const newPost = {
-        title,
-        content,
-        author: req.user.username,
-        createdAt: new Date()
-    };
+  const newPost = {
+    title,
+    content,
+    author: req.user.username,
+    createdAt: new Date(),
+  };
+
+  await db.collection("posts").insertOne(newPost);
+  res.status(201).json({ message: "Пост добавлен", post: newPost });
+});
