@@ -10,3 +10,6 @@ postsRouter.get("/", async (_, res) => {
   const posts = await db.collection("posts").find().toArray();
   res.json(posts);
 });
+
+// Создание поста 
+postsRouter.post("/", authMiddleware, async (req, res) => {
