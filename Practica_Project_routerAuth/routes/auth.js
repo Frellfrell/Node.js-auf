@@ -15,11 +15,6 @@ authRouter.post("/register", async (req, res) => {
       .json({ message: "Username and password are required" });
   }
 
-  const existingUser = await db.collection("users").findOne({ username });
-  if (existingUser) {
-    return res.status(400).json({ message: "Username already in use" });
-  }
-
   const db = getDb();
   const hashedPassword = bcrypt.hashSync(password, 10);
 
