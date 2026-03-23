@@ -1,12 +1,11 @@
 import { Router } from "express";
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { getDb } = require("../db");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { getDb } from "../db/index.js";
 
 const authRouter = Router();
 
-authRouter.post("/register", async (_, res) => {
+authRouter.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
   // Валидация наличия полей
