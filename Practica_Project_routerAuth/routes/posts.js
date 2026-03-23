@@ -15,3 +15,10 @@ postsRouter.get("/", async (_, res) => {
 postsRouter.post("/", authMiddleware, async (req, res) => {
     const { title, content } = req.body;
     const db = getDb();
+
+    const newPost = {
+        title,
+        content,
+        author: req.user.username,
+        createdAt: new Date()
+    };
