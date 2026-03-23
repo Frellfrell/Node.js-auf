@@ -45,10 +45,6 @@ authRouter.post("/login", async (_, res) => {
     return res.status(400).json({ message: "Invalid username or password" });
   }
 
-  const isPasswordValid = bcrypt.compareSync(password, user.password);
-  if (!isPasswordValid)
-    return res.status(400).json({ message: "Invalid username or password" });
-
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
     expiresIn: "2h",
   });
