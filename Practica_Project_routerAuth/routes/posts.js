@@ -13,3 +13,5 @@ postsRouter.get("/", async (_, res) => {
 
 // Создание поста 
 postsRouter.post("/", authMiddleware, async (req, res) => {
+    const { title, content } = req.body;
+    const db = getDb();
