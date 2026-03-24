@@ -32,3 +32,13 @@ app.get("/categories", async (req, res) => {
 app.post('/products', async (req, res) => {
     try {
         let { name, price, category } = req.body;
+
+        if (!mongoose.Types.ObjectId.isValid(category)) {
+            const foundCategory = await Category.findOne({ name: category });
+
+            if (!foundCategory) {
+                return res.status(404).json({ error: "Category not found by name" });
+            }
+            category = foundCategory._id;
+        }
+
