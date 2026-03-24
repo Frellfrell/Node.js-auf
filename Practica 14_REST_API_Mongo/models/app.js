@@ -23,3 +23,8 @@ app.post("/categories", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
+app.get("/categories", async (req, res) => {
+  const categories = await Category.find();
+  res.json(categories);
+});
