@@ -28,3 +28,7 @@ app.get("/categories", async (req, res) => {
   const categories = await Category.find();
   res.json(categories);
 });
+
+app.post('/products', async (req, res) => {
+    try {
+        let { name, price, category } = req.body;
