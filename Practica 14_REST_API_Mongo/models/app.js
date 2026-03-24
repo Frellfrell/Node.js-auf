@@ -49,3 +49,6 @@ app.post("/products", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
+
+app.get('/products', async (req, res) => {
