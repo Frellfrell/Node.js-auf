@@ -29,16 +29,23 @@ app.get("/categories", async (req, res) => {
   res.json(categories);
 });
 
-app.post('/products', async (req, res) => {
-    try {
-        let { name, price, category } = req.body;
+app.post("/products", async (req, res) => {
+  try {
+    let { name, price, category } = req.body;
 
-        if (!mongoose.Types.ObjectId.isValid(category)) {
-            const foundCategory = await Category.findOne({ name: category });
+    if (!mongoose.Types.ObjectId.isValid(category)) {
+      const foundCategory = await Category.findOne({ name: category });
 
-            if (!foundCategory) {
-                return res.status(404).json({ error: "Category not found by name" });
-            }
-            category = foundCategory._id;
-        }
+      if (!foundCategory) {
+        return res.status(404).json({ error: "Category not found by name" });
+      }
+      category = foundCategory._id;
+    }
 
+    const product = new Product({ name, price, category });
+    await product.save();
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
