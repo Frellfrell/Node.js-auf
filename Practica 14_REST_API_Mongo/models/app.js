@@ -80,3 +80,5 @@ app.get("/products/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+  // PUT /products/:id (Обновление)
+app.put('/products/:id', async (req, res) => {
