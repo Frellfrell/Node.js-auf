@@ -52,3 +52,6 @@ app.post("/products", async (req, res) => {
 
 
 app.get('/products', async (req, res) => {
+  try {
+        const { category, sortBy } = req.query;
+        let filter = {};
