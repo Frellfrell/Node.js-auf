@@ -93,3 +93,7 @@ app.put("/products/:id", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
+// DELETE /products/:id (Удаление)
+app.delete('/products/:id', async (req, res) => {
+    try {
