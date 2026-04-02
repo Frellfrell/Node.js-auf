@@ -109,5 +109,4 @@ app.delete("/products/:id", async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(` Server started on http://localhost:${PORT}`);
-  console.log(`Use 'npm run dev' for auto-reload with nodemon`);
 });
