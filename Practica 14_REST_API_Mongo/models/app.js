@@ -50,8 +50,22 @@ app.post("/products", async (req, res) => {
   }
 });
 
-
-app.get('/products', async (req, res) => {
+app.get("/products", async (req, res) => {
   try {
-        const { category, sortBy } = req.query;
-        let filter = {};
+    const { category, sortBy } = req.query;
+    let filter = {};
+
+    if (category) {
+      const foundCat = await Category.findOne({ name: category });
+      if (foundCat) filter.category = foundCat._id;
+    }
+
+    let query = Product.find(filter).populate("category");
+    if (sortBy === "price") query = query.sort({ price: 1 });
+
+    const products = await query;
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
