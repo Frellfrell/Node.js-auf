@@ -80,11 +80,16 @@ app.get("/products/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-  // PUT /products/:id (Обновление)
-app.put('/products/:id', async (req, res) => {
-
+// PUT /products/:id (Обновление)
+app.put("/products/:id", async (req, res) => {
   try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { 
-            new: true, 
-            runValidators: true 
-        });
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.json(product);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
